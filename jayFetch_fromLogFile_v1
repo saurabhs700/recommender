@@ -1,0 +1,57 @@
+# Fetching phrase lines from a file by Jay
+
+# Defining bold and normal font as variable
+# to print bold or normal text
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+reverse=$(tput smso)
+
+
+if [ -z "$1" ]
+then
+	#printf "No attached input provided, redirectiong further \n"
+	printf "\n\t${bold}Probable log files are as below,${normal}\n\n"
+	ls [lL][oO][gG]*
+		
+	printf "\n\t${bold}Give log File Name to fetch data${normal}\n"
+	read FileName
+else
+	FileName=$1
+fi
+
+# echo "$FileName"
+
+printf "\n\t${bold}Give Phrase to grep from that file, try to avoid symbols/marks/signs${normal}\n"
+read FilePhrase
+
+# NEVER PUT SPACE BETWEEN "=" AND VALUES.
+FilePhrase1=$( echo "${FilePhrase// /_}" )
+
+longFileName=${FileName}
+shortFileName="${longFileName:0:5}"
+# echo "${short}"
+
+
+grep "$FilePhrase" $FileName | awk '{print $(NF)}' > "uTau${FilePhrase1}_from_${shortFileName}".dat
+
+# printf "\t ${reverse}You chose ${bold}%d${normal}\n" "$VarL"
+# DO NOT PUT SPACE BETWEEN 2 STRINGS, wrong one as below,
+# printf "\n\t Last Column of File is Written to " "uTau${FilePhrase1}_from_${FileName}" ".dat" "${normal}\n\n"
+
+printf "\n\t Last Column of File is Written to ""${bold}uTau${FilePhrase1}_from_${shortFileName}"".dat""${normal}\n\n"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
